@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CategoryButtons from './CategoryButtons'
 import CrimeDetails from './CrimeDetails'
+import { Text, Stack, Heading, Spinner } from '@chakra-ui/core'
 
 export default class CrimeContainer extends Component {
   constructor (props) {
@@ -8,7 +9,7 @@ export default class CrimeContainer extends Component {
     this.state = {
       crimes: [],
       categories: [],
-      selectedCategory: null
+      selectedCategory: 'All'
     }
     this.handleSelect = this.handleSelect.bind(this)
   }
@@ -24,22 +25,27 @@ export default class CrimeContainer extends Component {
 
   handleSelect (category) {
     this.setState({
-      selectedCategory: category === 'All' ? null : category
+      selectedCategory: category
     })
   }
 
   render () {
     const { categories, crimes, selectedCategory } = this.state
-    const filteredCrime = selectedCategory ? crimes.filter(crime => crime.category === selectedCategory) : crimes
+    const filteredCrime = selectedCategory !== 'All' ? crimes.filter(crime => crime.category === selectedCategory) : crimes
     return (
       <div>
-        <h2>Sherlock's Catalog</h2>
-        <h4>Catalog of cases in Scotland Yard </h4>
+        <Stack>
+          <Heading as="h1" size="xl">
+            Sherlock's Catalog
+          </Heading>
+          <Text fontSize='xl'>Catalog of cases near Baker street in Scotland Yard records.</Text>
+          <Text fontSize='md'> Click on category to filter records. Card shows crime location and investigation status </Text>
+        </Stack>
         {filteredCrime.length
           ? <>
-            <CategoryButtons categories={categories} onSelect={this.handleSelect} />
+            <CategoryButtons categories={categories} selectedCategory={selectedCategory} onSelect={this.handleSelect} />
             <CrimeDetails crimes={filteredCrime} selectedCategory={selectedCategory} />
-          </> : <div>Loading...</div>}
+          </> : <Spinner size="xl" color="blue.500"/>}
       </div>
     )
   }
