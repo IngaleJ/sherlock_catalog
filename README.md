@@ -1,4 +1,7 @@
 # sherlock_catalog
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/030b10b2a60f47e1a5e2ce3dcff0bb07)](https://app.codacy.com/manual/IngaleJ/sherlock_catalog?utm_source=github.com&utm_medium=referral&utm_content=IngaleJ/sherlock_catalog&utm_campaign=Badge_Grade_Settings)
+
 App used by Sherlock Homes to keep track of his cases
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
